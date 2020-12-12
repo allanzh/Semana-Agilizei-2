@@ -1,1 +1,8 @@
-{}
+{
+    "$schema": "https://raw.githubusercontent.com/cypress-io/cypress/develop/cli/schema/cypress.schema.json",
+    "baseUrl": "",
+    "watchForFileChanges": true,
+    "experimentalSourceRewriting": true,
+    "viewportWidth": 1530,
+    "viewportHeight": 960
+}
