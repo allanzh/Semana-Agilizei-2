@@ -68,14 +68,20 @@ context('Compra', () => {
         //confirmar se o pedido foi processado
         cy.get('.cheque-indent strong')
             .should('contain.text','Your order on My Store is complete.');
-
-        //capturar o id de compra gerado (guardar com variável)
-        let idPedido;
+        
+        //capturar o id de compra gerado (guardar em arquivo json)
         cy.get('div.box').invoke('text').then((text) =>{
-            idPedido = text.match(/[A-Z]{9}/g).toString();
-            console.log(idPedido);
-            
+            //caminho do arquivo , objeto a ser guardado no json
+            cy.writeFile('cypress/fixtures/pedido.json', {id: `${ text.match(/[A-Z]{9}/g) }`})
         });
+
+        //clicar no botão para visualizar historico de compras
+        cy.get(".cart_navigation a[href$='history']").click();
+
+        //comparar o id guardado com o id do primeiro item do histórico (arquivo)
+        cy.readFile('cypress/fixtures/pedido.json').then((pedido) => {
+            cy.get('tr.first_item .history_link a').should('contain.text', pedido.id);
+        })
 
     });
 });
