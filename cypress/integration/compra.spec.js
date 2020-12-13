@@ -19,6 +19,15 @@ context('Compra', () => {
             .children('a') //buscar os filhos tag a
             .first() //buscar o primeiro deles 'add to cart'
             .click();
+        
+        //validar mensagem de inserção do produto no carrinho
+        cy.get('.icon-ok')
+            .parent()
+            .should('contain.text','Product successfully added to your shopping cart');
+        
+        //validar se o produto correto foi adicionado
+        cy.get('span#layer_cart_product_title')
+            .should('contain.text', nomeProduto);
 
         //clicar para prosseguir ao checkout
         cy.get(".button-container a[href$='controller=order']").click();
@@ -32,6 +41,13 @@ context('Compra', () => {
 
         //clicar para logar
         cy.get('button#SubmitLogin').click();
+
+        //validar se o checkbox de uso do endereço está marcado
+        cy.get('[type=checkbox]#addressesAreEquals')
+            .should('have.attr', 'checked', 'checked')
+            .should('have.attr','name','same');
+
+        cy.pause();
 
         //clicar para prosseguir ao checkout na tela de confirmação de endereço
         cy.get('button[name=processAddress]').click();
