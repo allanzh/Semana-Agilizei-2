@@ -2,6 +2,9 @@
 
 context('Compra', () => {
     it('Efetuar uma compra', () => {
+
+        cy.setCookie('PrestaShop-a30a9934ef476d11b6cc3c983616e364',
+                    'R6xmma6F4U6edNQuu67M0qWll1lFK2h7oz0ybPEkhkAGERJSmCLZdVWGKxZphTqrd%2F4%2FBEjcUWjzn8lhHAhuvJw7S9wDxOy8hI5hGtjJ73wdUEHIeQm83EtuDzeq00IRHZzxV5Svp%2BqKtSeH3xGGiNEW%2FVVWD5KIUtIZ%2BNwOAVx533o9k8w1hXBGXC13jeHyJX62MvW%2F9DcQ43aUz4KV5115J0vnH81eF7AIe2%2BOGYAnw%2BW3LwQBoTyeiK0lbpZefNnIHADd%2BHQRSdRkzMj0DZ2PslaKhWhX6HlAFoNG2v1kSUjQ0dj9ylrR1IxY8Vq%2FKsxqdbxxnRRiN3JuM4w3Sxqdjq2BGMJsoVWAtoPVwH4JEwlaGDmcLjDG6zWO5slLvf9rJRD%2BrliXc5gFPTEOV8OzD7lKC1LzN8%2BvbgD67c0%3D000305');
         
         //navegar para a urlbase configurada
         cy.visit('/');
@@ -35,12 +38,13 @@ context('Compra', () => {
         //clicar para prosseguir ao checkout na tela de resumo da compra
         cy.get(".cart_navigation a[title='Proceed to checkout']").click();
 
+        /* Comentando login pois foi implementado o background login via cookie
         //preencher campos de usuário e senha
         cy.get('#email').type('emailteste@allan.com'); //localizar campos pelo id com #
         cy.get('#passwd').type('123456');
 
         //clicar para logar
-        cy.get('button#SubmitLogin').click();
+        cy.get('button#SubmitLogin').click();*/
 
         //validar se o checkbox de uso do endereço está marcado
         cy.get('[type=checkbox]#addressesAreEquals')
