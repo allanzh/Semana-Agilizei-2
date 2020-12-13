@@ -47,8 +47,6 @@ context('Compra', () => {
             .should('have.attr', 'checked', 'checked')
             .should('have.attr','name','same');
 
-        cy.pause();
-
         //clicar para prosseguir ao checkout na tela de confirmação de endereço
         cy.get('button[name=processAddress]').click();
 
@@ -70,5 +68,14 @@ context('Compra', () => {
         //confirmar se o pedido foi processado
         cy.get('.cheque-indent strong')
             .should('contain.text','Your order on My Store is complete.');
+
+        //capturar o id de compra gerado (guardar com variável)
+        let idPedido;
+        cy.get('div.box').invoke('text').then((text) =>{
+            idPedido = text.match(/[A-Z]{9}/g).toString();
+            console.log(idPedido);
+            
+        });
+
     });
 });
