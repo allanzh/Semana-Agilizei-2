@@ -39,6 +39,7 @@ jobs:
       
       #rodar scripts de execução dos testes gerar report
       - run: npm run cy:run
+        continue-on-error: true
       - run: npm run report:merge
       - run: npm run report:mocha
       
